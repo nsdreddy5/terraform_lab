@@ -25,21 +25,6 @@ output "function_app" {
   value = azurerm_function_app.functionapp
 }
 
-
-/* resource "azurerm_monitor_diagnostic_setting" "demodiagnostic" {
-  name               = var.azurerm_monitor_diagnostic_setting_name
-  target_resource_id = azurerm_function_app.functionapp.id
-  storage_account_id = azurerm_storage_account.storage_account.id
-
-  metric {
-    category = "AllMetrics"
-
-    retention_policy {
-      enabled = false
-    }
-  }
-} */
-
 resource "azurerm_log_analytics_workspace" "demologaws" {
   name                = "acctest-01"
   location            = var.location
