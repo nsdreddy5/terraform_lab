@@ -15,28 +15,3 @@ resource "azurerm_network_security_group" "nsg" {
     destination_address_prefix = "*"
   }
 }
-
-variable "resource_group" {
-  description = "Resource group name"
-  type        = string
-}
-
-variable "location" {
-  type = string
-}
-
-variable "name" {
-  type = string
-}
-
-/* variable "source_address_prefix" {
-  type        = string
-}
-
-variable "destination_address_prefix" {
-  type = string
-} */
-
-output "nsg" {
-  value = azurerm_network_security_group.nsg
-}

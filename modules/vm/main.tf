@@ -52,8 +52,6 @@ resource "azurerm_windows_virtual_machine" "example" {
 
 }
 
-
-
 module "metric_alert" {
   source                            = "../metric-alert"
   azurerm_monitor_action_group_name = var.group_name
@@ -71,7 +69,6 @@ module "metric_alert" {
   }
 
 }
-
 
 
 resource "azurerm_virtual_machine_extension" "vmantivirus" {

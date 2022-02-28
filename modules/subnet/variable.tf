@@ -1,13 +1,3 @@
-/* variable "location_short" {
-  description = "Short string for Azure location."
-  type        = string
-} */
-
-/* variable "client_name" {
-  description = "Client name/account used in naming"
-  type        = string
-} */
-
 variable "name_prefix" {
   description = "Optional prefix for subnet names"
   type        = string
@@ -19,17 +9,6 @@ variable "subnet_name" {
   type        = string
   default     = null
 }
-
-/* variable "environment" {
-  description = "Project environment"
-  type        = string
-} */
-
-/* variable "stack" {
-  description = "Project stack name"
-  type        = string
-} */
-
 variable "resource_group" {
   description = "Resource group name"
   type        = string
@@ -50,12 +29,6 @@ variable "route_table_name" {
   type        = string
   default     = null
 }
-
-/* variable "route_table_id" {
-  description = "The Route Table RG to associate with the subnet. Default is the same RG than the subnet."
-  type        = string
-} */
-
 variable "network_security_group_name" {
   description = "The Network Security Group name to associate with the subnets"
   type        = string

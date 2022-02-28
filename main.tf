@@ -47,44 +47,6 @@ module "vnet" {
   /* log_analytics_workspace_id = module.Demo_Azure_Module_RG.log_analytics.id */
 }
 
-/* module "subnet" {
-  depends_on           = [module.Demo_Azure_Module_RG, module.vnet]
-  source               = "./modules/subnet"
-  resource_group       = module.vnet.vnet.resource_group_name
-  location             = module.vnet.vnet.location
-  address_prefix       = var.address_prefix
-  address_prefix1      = var.address_prefix1
-  subnet               = var.subnet
-  subnet1              = var.subnet1
-  service_endpoints    = var.service_endpoints
-  nsg_name             = var.nsg_name
-  virtual_network_name = module.vnet.vnet.name
-
-} */
-/* module "subnet" {
-  depends_on = [module.Demo_Azure_Module_RG,module.vnet]
-  source = "./modules/subnet"
-     for_each = { for subnet in local.subnets : subnet.name => subnet }
-    subnet_name = "reddy"
-   resource_group = module.vnet.vnet.resource_group_name
-   location = module.vnet.vnet.location
-     virtual_network_name = module.vnet.vnet.name
-   subnet_cidr_list = each.value.cidr
-     service_endpoints    = each.value.service_endpoints
- 
-   subnet_delegation    = { 
-    app-service-plan = [
-      {
-        name    = "Microsoft.Web/serverFarms"
-        actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
-      }
-    ]
-  }
-} */
-
-
-
-
 module "storage" {
   depends_on = [
     module.Demo_Azure_Module_RG
