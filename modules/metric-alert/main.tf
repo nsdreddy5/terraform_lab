@@ -1,4 +1,3 @@
-
 resource "azurerm_monitor_action_group" "acg" {
   name                = var.azurerm_monitor_action_group_name
   resource_group_name = var.resource_group

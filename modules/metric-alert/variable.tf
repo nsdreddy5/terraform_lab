@@ -13,12 +13,6 @@ variable "resource_group" {
 variable "scope" {
   type = list(string)
 }
-
-/* variable "action_group_id" {
-  type = list(string)
-} */
-
-
 variable "criteria" {
   type = map(object({
     metric_namespace = string

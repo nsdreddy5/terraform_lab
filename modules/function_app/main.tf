@@ -6,8 +6,6 @@ resource "azurerm_storage_account" "storage_account" {
   account_replication_type = var.account_replication_type
 }
 
-
-
 resource "azurerm_function_app" "functionapp" {
   name                       = var.function_app_name
   location                   = var.location
@@ -46,7 +44,7 @@ module "metric_alert" {
   scope                             = [var.app_service_plan_id]
   criteria = {
     criteria1 = {
-      metric_namespace = "Microsoft.Web/serverfarms"
+      metric_namespace = var.metric_namespace
       metric_name      = "CpuPercentage"
       aggregation      = "Average"
       operator         = "GreaterThan"

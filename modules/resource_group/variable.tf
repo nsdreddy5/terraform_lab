@@ -1,7 +1,7 @@
-variable "resource_group_name" {
+variable "resource_groups" {
   description = "The name of the module demo resource group in which the resources will be created"
-  type        = string
-  default     = "example_module_rg"
+  type        = list(string)
+  
 }
 
 variable "location" {

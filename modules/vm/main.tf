@@ -1,10 +1,15 @@
-/* resource "azurerm_subnet" "example" {
-  name                 = "internal"
-  resource_group_name  = azurerm_resource_group.example.name
-  virtual_network_name = azurerm_virtual_network.example.name
-  address_prefixes     = ["10.0.2.0/24"]
-} */
+resource "azurerm_public_ip" "demo_ip" {
+  name                = "demo_ip"
+  location            = var.location
+  resource_group_name = var.resource_group
+  allocation_method   = "Dynamic"
 
+
+}
+
+output "public_ip" {
+  value = azurerm_public_ip.demo_ip
+}
 resource "azurerm_network_interface" "example" {
   name                = "example-nic"
   location            = var.location
@@ -13,17 +18,22 @@ resource "azurerm_network_interface" "example" {
   ip_configuration {
     name                          = "internal"
     subnet_id                     = var.subnet_id
-    private_ip_address_allocation = "Dynamic"
+    private_ip_address_allocation = var.private_ip == false ? "static" : "Dynamic"
+
+       private_ip_address = var.private_ip == false ? azurerm_public_ip.demo_ip.ip_address : null
+
+    public_ip_address_id = var.private_ip == false ? azurerm_public_ip.demo_ip.id : null
+
   }
 }
 
 resource "azurerm_windows_virtual_machine" "example" {
-  name                = "example-machine"
+  name                = var.vm_name
   resource_group_name = var.resource_group
   location            = var.location
   size                = "Standard_F2"
-  admin_username      = "adminuser"
-  admin_password      = "P@$$w0rd1234!"
+  admin_username      = var.vm_admin_username
+  admin_password      = var.vm_admin_password
   network_interface_ids = [
     azurerm_network_interface.example.id,
   ]
@@ -42,35 +52,7 @@ resource "azurerm_windows_virtual_machine" "example" {
 
 }
 
-/* resource "azurerm_monitor_action_group" "acg" {
-  name                = var.azurerm_monitor_action_group_name
-  resource_group_name = var.resource_group
-  short_name          = "demoag"
 
-  email_receiver {
-    name          = "sendtoadmin"
-    email_address = "nsdreddy@outlook.com"
-  }
-}
-
-resource "azurerm_monitor_metric_alert" "demorule1" {
-  name                = var.azurerm_monitor_metric_alert_name
-  resource_group_name = var.resource_group
-  scopes              = [azurerm_windows_virtual_machine.example.id]
-  description         = "Action will be triggered when CPU percentage is greater than 60."
-
-  criteria {
-    metric_namespace = "Microsoft.Compute/virtualMachines"
-    metric_name      = "Percentage CPU"
-    aggregation      = "Average"
-    operator         = "GreaterThan"
-    threshold        = 60
-  }
-
-  action {
-    action_group_id = azurerm_monitor_action_group.acg.id
-  }
-} */
 
 module "metric_alert" {
   source                            = "../metric-alert"
@@ -88,7 +70,6 @@ module "metric_alert" {
     }
   }
 
-  /* action_group_id = azurerm_monitor_action_group.acg.id */
 }
 
 
@@ -118,8 +99,4 @@ resource "azurerm_virtual_machine_extension" "vmantivirus" {
 }
 }
 SETTINGS
-
-  /* tags {
-environment = "lab" 
-} */
 }

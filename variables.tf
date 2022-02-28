@@ -17,6 +17,10 @@ variable "resource_group" {
   type = string
   /* default = "nsdrrs" */
 }
+variable "resource_groups" {
+  type = list(string)
+  /* default = "nsdrrs" */
+}
 
 variable "action_group_name" {
   type = string
@@ -54,6 +58,11 @@ variable "address_prefix1" {
 }
 
 variable "service_endpoints" {
+  type = list(string)
+  /* default = ["Microsoft.keyvault"] */
+}
+
+variable "subnet_delegation" {
   type = list(string)
   /* default = ["Microsoft.keyvault"] */
 }
@@ -111,6 +120,25 @@ variable "azurerm_monitor_metric_alert_name" {
   type = string
 }
 
+variable "private_ip" {
+  type    = bool
+  default = true
+}
+
+variable "vm_name" {
+  type    = string
+  default = "windows_vm"
+}
+
+variable "vm_admin_username" {
+  type    = string
+  default = "admin"
+}
+
+variable "vm_admin_password" {
+  type    = string
+  default = "P@$$w0rd1234!"
+}
 /* variable "threshold" {
   type = value
 } */

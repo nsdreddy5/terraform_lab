@@ -1,8 +1,39 @@
 module "Demo_Azure_Module_RG" {
   source              = "./Modules/Resource_Group"
+  resource_groups = var.resource_groups
+  location            = var.location
+}
+module "log_analytics" {
+  source              = "./Modules/log_analytics"
   resource_group_name = var.resource_group
   location            = var.location
 }
+locals {
+  network_security_group_names = ["nsg1", "nsg2"]
+  subnetname = ["appsubnet","dbsubnet"]
+  cidr = ["10.0.1.0/24","10.0.2.0/24"]
+
+  /* vnet_cidr = "10.0.1.0/24" */
+
+  subnets = [
+    {
+      name              = "diwakar"
+      cidr              = ["10.0.1.0/24"]
+      service_endpoints = ["Microsoft.Storage", "Microsoft.KeyVault", "Microsoft.ServiceBus", "Microsoft.Web"]
+      /* nsg_name          = local.network_security_group_names[0] */
+      /* vnet_name         = module.azure-network-vnet.virtual_network_name */
+
+    },
+    {
+      name              = "subnet2"
+      cidr              = ["10.0.2.0/24"]
+      service_endpoints = ["Microsoft.Storage", "Microsoft.KeyVault", "Microsoft.ServiceBus", "Microsoft.Web"]
+      /* nsg_name          = local.network_security_group_names[2]
+      vnet_name         = module.azure-network-vnet.virtual_network_name */
+    }
+  ]
+}
+
 
 module "vnet" {
   depends_on = [
@@ -13,9 +44,10 @@ module "vnet" {
   address_space  = var.address_space
   resource_group = var.resource_group
   location       = var.location
+  /* log_analytics_workspace_id = module.Demo_Azure_Module_RG.log_analytics.id */
 }
 
-module "subnet" {
+/* module "subnet" {
   depends_on           = [module.Demo_Azure_Module_RG, module.vnet]
   source               = "./modules/subnet"
   resource_group       = module.vnet.vnet.resource_group_name
@@ -28,7 +60,30 @@ module "subnet" {
   nsg_name             = var.nsg_name
   virtual_network_name = module.vnet.vnet.name
 
-}
+} */
+/* module "subnet" {
+  depends_on = [module.Demo_Azure_Module_RG,module.vnet]
+  source = "./modules/subnet"
+     for_each = { for subnet in local.subnets : subnet.name => subnet }
+    subnet_name = "reddy"
+   resource_group = module.vnet.vnet.resource_group_name
+   location = module.vnet.vnet.location
+     virtual_network_name = module.vnet.vnet.name
+   subnet_cidr_list = each.value.cidr
+     service_endpoints    = each.value.service_endpoints
+ 
+   subnet_delegation    = { 
+    app-service-plan = [
+      {
+        name    = "Microsoft.Web/serverFarms"
+        actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+      }
+    ]
+  }
+} */
+
+
+
 
 module "storage" {
   depends_on = [
@@ -63,7 +118,8 @@ module "function_app" {
   action_group_name        = var.action_group_name
   account_tier             = var.storage_account_account_tier
   account_replication_type = var.storage_account_replication_type
-  subnet                   = module.subnet.subnet.id
+  /* subnet                   = module.subnet.subnet.id */
+  subnet = module.appsubnet.subnet.id
   /* app_service_plan_name                   = var.app_service_plan_name */
   /* azurerm_monitor_diagnostic_setting_name = var.azurerm_monitor_diagnostic_setting_name */
   azurerm_monitor_action_group_name  = var.azurerm_monitor_action_group_name
@@ -83,15 +139,19 @@ module "windows_machine" {
 
   location          = var.location
   resource_group    = var.resource_group
-  subnet_id         = module.subnet.db_subnet.id
+  subnet_id         = module.dbsubnet.subnet.id
   group_name        = var.group_name
   metric_alert_name = var.metric_alert_name
+  vm_name = var.vm_name
+  vm_admin_username = var.vm_admin_username
+  vm_admin_password = var.vm_admin_password
+  private_ip = var.private_ip
 
 }
 
 module "diagnostics" {
   depends_on = [
-    module.function_app, module.windows_machine
+    module.function_app, module.windows_machine,module.Demo_Azure_Module_RG
   ]
   source                     = "./modules/diagnostic_setting"
   name                       = "abcd"
@@ -120,10 +180,81 @@ module "diagnostics" {
 }
 
 
+module "appsubnet" {
+  depends_on = [
+    module.Demo_Azure_Module_RG,module.vnet
+  ]
+  source = "./modules/subnet"
+   subnet_name = local.subnetname[0]
+   resource_group = module.vnet.vnet.resource_group_name
+   location = module.vnet.vnet.location
+     virtual_network_name = module.vnet.vnet.name
+   subnet_cidr_list = var.address_prefix
+     service_endpoints    = var.service_endpoints
+ 
+   subnet_delegation    = { 
+    app-service-plan = [
+      {
+        name    = "Microsoft.Web/serverFarms"
+        actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+      }
+    ]
+  }
+}
+
+output "subnet" {
+  value = module.appsubnet.subnet
+}
 
 
 
+module "dbsubnet" {
+  depends_on = [
+    module.Demo_Azure_Module_RG,module.vnet
+  ]
+  source = "./modules/subnet"
+   subnet_name = local.subnetname[1]
+   resource_group = module.vnet.vnet.resource_group_name
+   location = module.vnet.vnet.location
+     virtual_network_name = module.vnet.vnet.name
+   subnet_cidr_list = var.address_prefix1
+     service_endpoints    = var.service_endpoints
+ 
+   subnet_delegation    = { 
+    app-service-plan = [
+      {
+        name    = "Microsoft.Web/serverFarms"
+        actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+      }
+    ]
+  }
+}
+
+output "dbsubnet" {
+  value = module.dbsubnet.subnet
+}
 
 
 
+module "nsg" {
+  depends_on = [module.Demo_Azure_Module_RG,module.dbsubnet,module.appsubnet]
+  source = "./modules/nsg"
+  name = "nsg-rule"
+  location = var.location
+  resource_group = var.resource_group
+  /* source_address_prefix =  module.appsubnet.subnet.id
+  destination_address_prefix =  module.dbsubnet.subnet.id */
+}
+
+
+
+ resource "azurerm_subnet_network_security_group_association" "subnet_association" {
+  subnet_id                 = module.appsubnet.subnet.id
+  network_security_group_id = module.nsg.nsg.id
+}
+
+ resource "azurerm_subnet_network_security_group_association" "dbsubnet_association" {
+  subnet_id                 = module.dbsubnet.subnet.id
+  network_security_group_id = module.nsg.nsg.id
+}
 

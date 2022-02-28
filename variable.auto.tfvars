@@ -1,6 +1,7 @@
 name                                    = "myvnet"
 address_space                           = ["10.0.0.0/16"]
 location                                = "eastus"
+resource_groups                          = ["nsdrrs","demorg"]
 resource_group                          = "nsdrrs"
 subnet                                  = "app"
 subnet1                                 = "db"
@@ -24,5 +25,11 @@ action_group_name                       = "abcefgh"
 group_name                              = "function_alert"
 metric_alert_name                       = "vm-metric-alert"
 alert_name                              = "function-alert"
+//virtual machine
+vm_name = "demo-vm"
+vm_admin_username = "admin"
+vm_admin_password = "P@$$w0rd1234!"
+private_ip = true
 /* threshold = "60" */
 
+subnet_delegation = ["Micorosft.Sql/servers"]

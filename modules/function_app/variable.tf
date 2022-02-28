@@ -57,3 +57,7 @@ variable "azurerm_monitor_metric_alert_name" {
 /* variable "threshold" {
   type = value
 } */
+variable "metric_namespace" {
+  type    = string
+  default = "Microsoft.Web/serverfarms"
+}

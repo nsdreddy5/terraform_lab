@@ -28,6 +28,22 @@ variable "azurerm_monitor_metric_alert_name" {
   default = "metricrule"
 }
 
-/* variable "threshold" {
-  type = value
-} */
+variable "private_ip" {
+  type    = bool
+  default = true
+}
+
+variable "vm_name" {
+  type    = string
+  default = "windows_vm"
+}
+
+variable "vm_admin_username" {
+  type    = string
+  default = "admin"
+}
+
+variable "vm_admin_password" {
+  type    = string
+  default = "P@$$w0rd1234!"
+}
