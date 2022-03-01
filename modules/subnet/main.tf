@@ -1,73 +1,37 @@
 resource "azurerm_subnet" "subnet" {
-  name                 = var.subnet_name
+ for_each = var.subnet
+  name                = each.value["name"]
   resource_group_name  = var.resource_group
-  virtual_network_name = var.virtual_network_name
-  address_prefixes     = var.subnet_cidr_list
-
-  service_endpoints = var.service_endpoints
-
-  dynamic "delegation" {
-    for_each = var.subnet_delegation
-    content {
-      name = delegation.key
-      dynamic "service_delegation" {
-        for_each = toset(delegation.value)
-        content {
-          name    = service_delegation.value.name
-          actions = service_delegation.value.actions
-        }
-      }
-    }
-  }
-  enforce_private_link_endpoint_network_policies = var.enforce_private_link
+  virtual_network_name = var.virtual_network
+  address_prefixes     = each.value["address_prefixes"]
 }
 
-/* resource "azurerm_network_security_group" "nsg" {
-  name                = "abcefghhiui"
+resource "azurerm_network_security_group" "nsg" {
+  for_each = var.nsg
+  name = each.value["name"]
   location            = var.location
   resource_group_name = var.resource_group
 
   security_rule {
-    name                       = "test123"
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = azurerm_subnet.subnet.address_prefix
-    destination_address_prefix = azurerm_subnet.subnet.address_prefix
+    name                       = each.value.security_rule.name
+    priority                   = each.value.security_rule.priority
+    direction                  = each.value.security_rule.direction
+    access                     = each.value.security_rule.access
+    protocol                   = each.value.security_rule.protocol
+    source_port_range          = each.value.security_rule.source_port_range
+    destination_port_range     = each.value.security_rule.destination_port_range
+    source_address_prefix      = each.value.security_rule.source_address_prefix
+    destination_address_prefix = each.value.security_rule.destination_address_prefix
+
   }
 }
 
-variable "resource_group" {
-  description = "Resource group name"
-  type        = string
-}
-
-variable "location" {
-  type = string
+/* resource "azurerm_subnet_network_security_group_association" "nsg-assocation" {
+  for_each = azurerm_subnet.subnet[*].id
+  subnet_id                 = each.value
+  network_security_group_id = azurerm_network_security_group.nsg[0].id
 } */
 
-
-/* resource "azurerm_subnet_network_security_group_association" "subnet_association" {
-  count = var.network_security_group_name == null ? 0 : 1
-
-  subnet_id                 = azurerm_subnet.subnet.id
-  network_security_group_id = azurerm_network_security_group.nsg.id
-} */
-
-/* resource "azurerm_subnet_route_table_association" "route_table_association" {
-  count = var.route_table_name == null ? 0 : 1
-
-  subnet_id      = azurerm_subnet.subnet.id
-  route_table_id = var.route_table_id
-
-  resource "azurerm_subnet_route_table_association" "route_table_association" {
-  subnet_id      = module.appsubnet.subnet.id
-  route_table_id = var.route_table_id
-}
-} */
 
 data "azurerm_subscription" "current" {
 }

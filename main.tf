@@ -5,6 +5,9 @@ module "Demo_Azure_Module_RG" {
 }
 module "log_analytics" {
   source              = "./Modules/log_analytics"
+  depends_on = [
+    module.Demo_Azure_Module_RG
+  ]
   resource_group_name = var.resource_group
   location            = var.location
 }
@@ -17,7 +20,7 @@ locals {
 
   subnets = [
     {
-      name              = "diwakar"
+      name              = "subnet1"
       cidr              = ["10.0.1.0/24"]
       service_endpoints = ["Microsoft.Storage", "Microsoft.KeyVault", "Microsoft.ServiceBus", "Microsoft.Web"]
       /* nsg_name          = local.network_security_group_names[0] */
@@ -34,19 +37,28 @@ locals {
   ]
 }
 
-
+output "azurerm_subnet" {
+  value = module.subnet.subnet.*
+}
 module "vnet" {
   depends_on = [
     module.Demo_Azure_Module_RG
   ]
   source         = "./modules/vnet"
-  name           = var.name
-  address_space  = var.address_space
-  resource_group = var.resource_group
-  location       = var.location
-  /* log_analytics_workspace_id = module.Demo_Azure_Module_RG.log_analytics.id */
+virtual_networks = var.virtual_networks
+
 }
 
+module "subnet"{
+  depends_on = [module.vnet]
+  source         = "./modules/subnet"
+  subnet = var.subnet
+  resource_group = var.resource_group
+  location =  var.location
+  nsg = var.nsg
+  virtual_network = var.virtual_network
+
+}
 module "storage" {
   depends_on = [
     module.Demo_Azure_Module_RG
@@ -80,8 +92,7 @@ module "function_app" {
   action_group_name        = var.action_group_name
   account_tier             = var.storage_account_account_tier
   account_replication_type = var.storage_account_replication_type
-  /* subnet                   = module.subnet.subnet.id */
-  subnet = module.appsubnet.subnet.id
+  subnet = module.subnet.subnet.subnet1.id
   /* app_service_plan_name                   = var.app_service_plan_name */
   /* azurerm_monitor_diagnostic_setting_name = var.azurerm_monitor_diagnostic_setting_name */
   azurerm_monitor_action_group_name  = var.azurerm_monitor_action_group_name
@@ -101,7 +112,7 @@ module "windows_machine" {
 
   location          = var.location
   resource_group    = var.resource_group
-  subnet_id         = module.dbsubnet.subnet.id
+  subnet_id         = module.subnet.subnet.subnet3.id
   group_name        = var.group_name
   metric_alert_name = var.metric_alert_name
   vm_name           = var.vm_name
@@ -129,88 +140,26 @@ module "diagnostics" {
     log1 = {
       category = "FunctionAppLogs"
       enabled  = true
-
-      /* retention_policy = { 
-        enabled = false
-        days    = 30
-      
-      } */
-
     }
 
   }
 }
 
 
-module "appsubnet" {
-  depends_on = [
-    module.Demo_Azure_Module_RG, module.vnet
-  ]
-  source               = "./modules/subnet"
-  subnet_name          = local.subnetname[0]
-  resource_group       = module.vnet.vnet.resource_group_name
-  location             = module.vnet.vnet.location
-  virtual_network_name = module.vnet.vnet.name
-  subnet_cidr_list     = var.address_prefix
-  service_endpoints    = var.service_endpoints
-
-  subnet_delegation = {
-    app-service-plan = [
-      {
-        name    = "Microsoft.Web/serverFarms"
-        actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
-      }
-    ]
-  }
-}
-
-output "subnet" {
-  value = module.appsubnet.subnet
-}
-
-
-
-module "dbsubnet" {
-  depends_on = [
-    module.Demo_Azure_Module_RG, module.vnet
-  ]
-  source               = "./modules/subnet"
-  subnet_name          = local.subnetname[1]
-  resource_group       = module.vnet.vnet.resource_group_name
-  location             = module.vnet.vnet.location
-  virtual_network_name = module.vnet.vnet.name
-  subnet_cidr_list     = var.address_prefix1
-  service_endpoints    = var.service_endpoints
-
-  subnet_delegation = {
-    app-service-plan = [
-      {
-        name    = "Microsoft.Web/serverFarms"
-        actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
-      }
-    ]
-  }
-}
-
-output "dbsubnet" {
-  value = module.dbsubnet.subnet
-}
-
-
 //NSG
-module "nsg" {
+/* module "nsg" {
   depends_on     = [module.Demo_Azure_Module_RG, module.dbsubnet, module.appsubnet]
   source         = "./modules/nsg"
   name           = "nsg-rule"
   location       = var.location
-  resource_group = var.resource_group
+  resource_group = var.resource_group */
   /* source_address_prefix =  module.appsubnet.subnet.id
   destination_address_prefix =  module.dbsubnet.subnet.id */
-}
+/* } */
 
 
 //NSG association
-resource "azurerm_subnet_network_security_group_association" "subnet_association" {
+/* resource "azurerm_subnet_network_security_group_association" "subnet_association" {
   subnet_id                 = module.appsubnet.subnet.id
   network_security_group_id = module.nsg.nsg.id
 }
@@ -235,4 +184,4 @@ http_correlation_protocol=var.http_correlation_protocol
 api_management_api_name=var.api_management_api_name
 display_name=var.display_name
 path=var.path
-}
+/* } */ 

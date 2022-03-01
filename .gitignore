@@ -5,3 +5,4 @@ terraform.tfstate
 terraform.tfstate.backup
 .terraform/modules/modules.json
 .terraform/providers/registry.terraform.io/hashicorp/azurerm/2.95.0/windows_386/terraform-provider-azurerm_v2.95.0_x5.exe
+.terraform/providers/registry.terraform.io/hashicorp/azuread/2.18.0/windows_386/terraform-provider-azuread_v2.18.0_x5.exe

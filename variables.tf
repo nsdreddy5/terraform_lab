@@ -1,13 +1,3 @@
-variable "name" {
-  type = string
-  /* default = "myvnet" */
-}
-
-variable "address_space" {
-  type = list(string)
-  /* default = ["10.0.0.0/16"] */
-}
-
 variable "location" {
   type = string
   /* default = "eastus" */
@@ -36,35 +26,6 @@ variable "metric_alert_name" {
 
 variable "alert_name" {
   type = string
-}
-variable "subnet" {
-  type = string
-  /* default = "subnet" */
-}
-
-variable "subnet1" {
-  type = string
-  /* default = "subnet1" */
-}
-
-variable "address_prefix" {
-  type = list(string)
-  /* default = ["10.0.1.0/24"] */
-}
-
-variable "address_prefix1" {
-  type = list(string)
-  /* default = ["10.0.2.0/24"] */
-}
-
-variable "service_endpoints" {
-  type = list(string)
-  /* default = ["Microsoft.keyvault"] */
-}
-
-variable "subnet_delegation" {
-  type = list(string)
-  /* default = ["Microsoft.keyvault"] */
 }
 
 variable "app_service_plan_name" {
@@ -177,7 +138,32 @@ variable "path" {
   type = string
 }
 
+variable "virtual_networks" {
+  type = map(object({
+    name = string
+    address_space = list(string)
+    location = string
+    resource_group_name = string
+ }))
+default = {}
 
+}
+
+variable "virtual_network" {
+  type = string
+}
+
+variable "subnet" {
+  type = map(object({
+    name = string
+    address_prefixes = list(string)
+ }))
+default = {}
+
+}
+variable "nsg" {
+  type = any
+}
 /* variable "threshold" {
   type = value
 } */

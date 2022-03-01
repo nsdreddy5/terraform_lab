@@ -1,19 +1,10 @@
-variable "name" {
-  type = string
-}
+variable "virtual_networks" {
+  type = map(object({
+    name = string
+    address_space = list(string)
+    location = string
+    resource_group_name = string
+ }))
+default = {}
 
-variable "address_space" {
-  type = list(string)
 }
-
-variable "location" {
-  type = string
-}
-
-variable "resource_group" {
-  type = string
-}
-
-/* variable "log_analytics_workspace_id" {
-  type = string
-} */
