@@ -47,7 +47,7 @@ variable "service_endpoints" {
   default     = []
 }
 
- variable "location" {
+variable "location" {
   type = string
 }
 

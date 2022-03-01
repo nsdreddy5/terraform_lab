@@ -139,6 +139,45 @@ variable "vm_admin_password" {
   type    = string
   default = "P@$$w0rd1234!"
 }
+
+variable "application_insights" {
+  type = string
+}
+
+variable "apim_management" {
+  type = string
+}
+
+variable "api_management_logger" {
+  type = string
+}
+
+variable "application_type" {
+  type = string
+}
+
+variable "verbosity" {
+  type = string
+}
+
+variable "http_correlation_protocol" {
+  type = string
+}
+
+
+variable "api_management_api_name" {
+  type = string
+}
+
+variable "display_name" {
+  type = string
+}
+
+variable "path" {
+  type = string
+}
+
+
 /* variable "threshold" {
   type = value
 } */

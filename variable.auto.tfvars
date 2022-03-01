@@ -1,7 +1,7 @@
 name                                    = "myvnet"
 address_space                           = ["10.0.0.0/16"]
 location                                = "eastus"
-resource_groups                          = ["nsdrrs","demorg"]
+resource_groups                         = ["nsdrrs", "demorg"]
 resource_group                          = "nsdrrs"
 subnet                                  = "app"
 subnet1                                 = "db"
@@ -26,10 +26,20 @@ group_name                              = "function_alert"
 metric_alert_name                       = "vm-metric-alert"
 alert_name                              = "function-alert"
 //virtual machine
-vm_name = "demo-vm"
+vm_name           = "demo-vm"
 vm_admin_username = "admin"
 vm_admin_password = "P@$$w0rd1234!"
-private_ip = true
+private_ip        = true
 /* threshold = "60" */
 
 subnet_delegation = ["Micorosft.Sql/servers"]
+
+application_insights  = "demo-application-insight"
+apim_management       = "demoapimmanagement1"
+api_management_logger = "api-log"
+application_type = "web"
+verbosity ="verbose"
+http_correlation_protocol ="W3C"
+api_management_api_name = "demo-api-management"
+display_name="demo-api"
+path="example"

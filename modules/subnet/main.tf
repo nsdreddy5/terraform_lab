@@ -6,7 +6,7 @@ resource "azurerm_subnet" "subnet" {
 
   service_endpoints = var.service_endpoints
 
-dynamic "delegation" {
+  dynamic "delegation" {
     for_each = var.subnet_delegation
     content {
       name = delegation.key

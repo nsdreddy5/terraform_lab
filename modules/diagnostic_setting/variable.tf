@@ -16,7 +16,7 @@ variable "log_analytics_workspace_id" {
 variable "logs" {
   type = map(object({
     category = string
-    enabled = bool
+    enabled  = bool
     })
   )
 }

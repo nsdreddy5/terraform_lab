@@ -1,0 +1,1288 @@
+{
+  "version": 4,
+  "terraform_version": "1.1.5",
+  "serial": 1340,
+  "lineage": "39e101da-9b98-27ee-cbf3-b5561bb0c35f",
+  "outputs": {
+    "dbsubnet": {
+      "value": {
+        "address_prefix": "10.0.2.0/24",
+        "address_prefixes": [
+          "10.0.2.0/24"
+        ],
+        "delegation": [
+          {
+            "name": "app-service-plan",
+            "service_delegation": [
+              {
+                "actions": [
+                  "Microsoft.Network/virtualNetworks/subnets/action"
+                ],
+                "name": "Microsoft.Web/serverFarms"
+              }
+            ]
+          }
+        ],
+        "enforce_private_link_endpoint_network_policies": false,
+        "enforce_private_link_service_network_policies": false,
+        "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/dbsubnet",
+        "name": "dbsubnet",
+        "resource_group_name": "nsdrrs",
+        "service_endpoint_policy_ids": [],
+        "service_endpoints": [
+          "Microsoft.keyvault"
+        ],
+        "timeouts": null,
+        "virtual_network_name": "myvnet"
+      },
+      "type": [
+        "object",
+        {
+          "address_prefix": "string",
+          "address_prefixes": [
+            "list",
+            "string"
+          ],
+          "delegation": [
+            "list",
+            [
+              "object",
+              {
+                "name": "string",
+                "service_delegation": [
+                  "list",
+                  [
+                    "object",
+                    {
+                      "actions": [
+                        "list",
+                        "string"
+                      ],
+                      "name": "string"
+                    }
+                  ]
+                ]
+              }
+            ]
+          ],
+          "enforce_private_link_endpoint_network_policies": "bool",
+          "enforce_private_link_service_network_policies": "bool",
+          "id": "string",
+          "name": "string",
+          "resource_group_name": "string",
+          "service_endpoint_policy_ids": [
+            "set",
+            "string"
+          ],
+          "service_endpoints": [
+            "list",
+            "string"
+          ],
+          "timeouts": [
+            "object",
+            {
+              "create": "string",
+              "delete": "string",
+              "read": "string",
+              "update": "string"
+            }
+          ],
+          "virtual_network_name": "string"
+        }
+      ]
+    },
+    "subnet": {
+      "value": {
+        "address_prefix": "10.0.1.0/24",
+        "address_prefixes": [
+          "10.0.1.0/24"
+        ],
+        "delegation": [
+          {
+            "name": "app-service-plan",
+            "service_delegation": [
+              {
+                "actions": [
+                  "Microsoft.Network/virtualNetworks/subnets/action"
+                ],
+                "name": "Microsoft.Web/serverFarms"
+              }
+            ]
+          }
+        ],
+        "enforce_private_link_endpoint_network_policies": false,
+        "enforce_private_link_service_network_policies": false,
+        "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/appsubnet",
+        "name": "appsubnet",
+        "resource_group_name": "nsdrrs",
+        "service_endpoint_policy_ids": [],
+        "service_endpoints": [
+          "Microsoft.keyvault"
+        ],
+        "timeouts": null,
+        "virtual_network_name": "myvnet"
+      },
+      "type": [
+        "object",
+        {
+          "address_prefix": "string",
+          "address_prefixes": [
+            "list",
+            "string"
+          ],
+          "delegation": [
+            "list",
+            [
+              "object",
+              {
+                "name": "string",
+                "service_delegation": [
+                  "list",
+                  [
+                    "object",
+                    {
+                      "actions": [
+                        "list",
+                        "string"
+                      ],
+                      "name": "string"
+                    }
+                  ]
+                ]
+              }
+            ]
+          ],
+          "enforce_private_link_endpoint_network_policies": "bool",
+          "enforce_private_link_service_network_policies": "bool",
+          "id": "string",
+          "name": "string",
+          "resource_group_name": "string",
+          "service_endpoint_policy_ids": [
+            "set",
+            "string"
+          ],
+          "service_endpoints": [
+            "list",
+            "string"
+          ],
+          "timeouts": [
+            "object",
+            {
+              "create": "string",
+              "delete": "string",
+              "read": "string",
+              "update": "string"
+            }
+          ],
+          "virtual_network_name": "string"
+        }
+      ]
+    }
+  },
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "azurerm_subnet_network_security_group_association",
+      "name": "dbsubnet_association",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/dbsubnet",
+            "network_security_group_id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Network/networkSecurityGroups/nsg-rule",
+            "subnet_id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/dbsubnet",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "module.Demo_Azure_Module_RG.azurerm_resource_group.rg",
+            "module.appsubnet.azurerm_subnet.subnet",
+            "module.appsubnet.data.azurerm_subscription.current",
+            "module.dbsubnet.azurerm_subnet.subnet",
+            "module.dbsubnet.data.azurerm_subscription.current",
+            "module.nsg.azurerm_network_security_group.nsg",
+            "module.vnet.azurerm_virtual_network.vnet"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_subnet_network_security_group_association",
+      "name": "subnet_association",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/appsubnet",
+            "network_security_group_id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Network/networkSecurityGroups/nsg-rule",
+            "subnet_id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/appsubnet",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "module.Demo_Azure_Module_RG.azurerm_resource_group.rg",
+            "module.appsubnet.azurerm_subnet.subnet",
+            "module.appsubnet.data.azurerm_subscription.current",
+            "module.dbsubnet.azurerm_subnet.subnet",
+            "module.dbsubnet.data.azurerm_subscription.current",
+            "module.nsg.azurerm_network_security_group.nsg",
+            "module.vnet.azurerm_virtual_network.vnet"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.Demo_Azure_Module_RG",
+      "mode": "managed",
+      "type": "azurerm_resource_group",
+      "name": "rg",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "index_key": "demorg",
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/demorg",
+            "location": "eastus",
+            "name": "demorg",
+            "tags": {
+              "environment": "Example",
+              "name": "diwakar"
+            },
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo1NDAwMDAwMDAwMDAwLCJkZWxldGUiOjU0MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjo1NDAwMDAwMDAwMDAwfX0="
+        },
+        {
+          "index_key": "nsdrrs",
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs",
+            "location": "eastus",
+            "name": "nsdrrs",
+            "tags": {
+              "environment": "Example",
+              "name": "diwakar"
+            },
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo1NDAwMDAwMDAwMDAwLCJkZWxldGUiOjU0MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjo1NDAwMDAwMDAwMDAwfX0="
+        }
+      ]
+    },
+    {
+      "module": "module.apim",
+      "mode": "managed",
+      "type": "azurerm_api_management",
+      "name": "apim",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": []
+    },
+    {
+      "module": "module.apim",
+      "mode": "managed",
+      "type": "azurerm_application_insights",
+      "name": "application_insights",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "app_id": "b73f209e-80e8-4bf5-9577-453a8b076763",
+            "application_type": "web",
+            "connection_string": "InstrumentationKey=848f915e-40ba-4e17-8739-24e84dc50538;IngestionEndpoint=https://eastus-2.in.applicationinsights.azure.com/",
+            "daily_data_cap_in_gb": 100,
+            "daily_data_cap_notifications_disabled": false,
+            "disable_ip_masking": false,
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Insights/components/demo-application-insight",
+            "instrumentation_key": "848f915e-40ba-4e17-8739-24e84dc50538",
+            "internet_ingestion_enabled": true,
+            "internet_query_enabled": true,
+            "local_authentication_disabled": false,
+            "location": "eastus",
+            "name": "demo-application-insight",
+            "resource_group_name": "nsdrrs",
+            "retention_in_days": 90,
+            "sampling_percentage": 100,
+            "tags": {},
+            "timeouts": null,
+            "workspace_id": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "module.Demo_Azure_Module_RG.azurerm_resource_group.rg"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.app_service_plan",
+      "mode": "managed",
+      "type": "azurerm_app_service_plan",
+      "name": "app_service_plan",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "app_service_environment_id": "",
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Web/serverfarms/app_service_plan",
+            "is_xenon": false,
+            "kind": "Windows",
+            "location": "eastus",
+            "maximum_elastic_worker_count": 1,
+            "maximum_number_of_workers": 10,
+            "name": "app_service_plan",
+            "per_site_scaling": false,
+            "reserved": false,
+            "resource_group_name": "nsdrrs",
+            "sku": [
+              {
+                "capacity": 1,
+                "size": "S1",
+                "tier": "Standard"
+              }
+            ],
+            "tags": {},
+            "timeouts": null,
+            "zone_redundant": false
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozNjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjozNjAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "module.Demo_Azure_Module_RG.azurerm_resource_group.rg"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.appsubnet",
+      "mode": "data",
+      "type": "azurerm_subscription",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "display_name": "Free Trial",
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a",
+            "location_placement_id": "PublicAndIndia_2015-09-01",
+            "quota_id": "FreeTrial_2014-09-01",
+            "spending_limit": "On",
+            "state": "Enabled",
+            "subscription_id": "aad125f6-3115-4d0e-abad-dd5a528f098a",
+            "tags": {},
+            "tenant_id": "913120d0-986e-4392-a285-1f7993584e83",
+            "timeouts": null
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "module": "module.appsubnet",
+      "mode": "managed",
+      "type": "azurerm_subnet",
+      "name": "subnet",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address_prefix": "10.0.1.0/24",
+            "address_prefixes": [
+              "10.0.1.0/24"
+            ],
+            "delegation": [
+              {
+                "name": "app-service-plan",
+                "service_delegation": [
+                  {
+                    "actions": [
+                      "Microsoft.Network/virtualNetworks/subnets/action"
+                    ],
+                    "name": "Microsoft.Web/serverFarms"
+                  }
+                ]
+              }
+            ],
+            "enforce_private_link_endpoint_network_policies": false,
+            "enforce_private_link_service_network_policies": false,
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/appsubnet",
+            "name": "appsubnet",
+            "resource_group_name": "nsdrrs",
+            "service_endpoint_policy_ids": [],
+            "service_endpoints": [
+              "Microsoft.KeyVault"
+            ],
+            "timeouts": null,
+            "virtual_network_name": "myvnet"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "module.Demo_Azure_Module_RG.azurerm_resource_group.rg",
+            "module.vnet.azurerm_virtual_network.vnet"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.dbsubnet",
+      "mode": "data",
+      "type": "azurerm_subscription",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "display_name": "Free Trial",
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a",
+            "location_placement_id": "PublicAndIndia_2015-09-01",
+            "quota_id": "FreeTrial_2014-09-01",
+            "spending_limit": "On",
+            "state": "Enabled",
+            "subscription_id": "aad125f6-3115-4d0e-abad-dd5a528f098a",
+            "tags": {},
+            "tenant_id": "913120d0-986e-4392-a285-1f7993584e83",
+            "timeouts": null
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "module": "module.dbsubnet",
+      "mode": "managed",
+      "type": "azurerm_subnet",
+      "name": "subnet",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address_prefix": "10.0.2.0/24",
+            "address_prefixes": [
+              "10.0.2.0/24"
+            ],
+            "delegation": [
+              {
+                "name": "app-service-plan",
+                "service_delegation": [
+                  {
+                    "actions": [
+                      "Microsoft.Network/virtualNetworks/subnets/action"
+                    ],
+                    "name": "Microsoft.Web/serverFarms"
+                  }
+                ]
+              }
+            ],
+            "enforce_private_link_endpoint_network_policies": false,
+            "enforce_private_link_service_network_policies": false,
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/dbsubnet",
+            "name": "dbsubnet",
+            "resource_group_name": "nsdrrs",
+            "service_endpoint_policy_ids": [],
+            "service_endpoints": [
+              "Microsoft.KeyVault"
+            ],
+            "timeouts": null,
+            "virtual_network_name": "myvnet"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "module.Demo_Azure_Module_RG.azurerm_resource_group.rg",
+            "module.vnet.azurerm_virtual_network.vnet"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.function_app",
+      "mode": "managed",
+      "type": "azurerm_function_app",
+      "name": "functionapp",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "app_service_plan_id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Web/serverfarms/app_service_plan",
+            "app_settings": {},
+            "auth_settings": [
+              {
+                "active_directory": [],
+                "additional_login_params": {},
+                "allowed_external_redirect_urls": [],
+                "default_provider": "",
+                "enabled": false,
+                "facebook": [],
+                "google": [],
+                "issuer": "",
+                "microsoft": [],
+                "runtime_version": "",
+                "token_refresh_extension_hours": 0,
+                "token_store_enabled": false,
+                "twitter": [],
+                "unauthenticated_client_action": ""
+              }
+            ],
+            "client_affinity_enabled": false,
+            "client_cert_mode": "",
+            "connection_string": [],
+            "custom_domain_verification_id": "E9CBAB6F7464826F83CB6DBF481FD2AB9893E9F869A0F092BC20B14B64300849",
+            "daily_memory_time_quota": 0,
+            "default_hostname": "ns-fun-app.azurewebsites.net",
+            "enable_builtin_logging": true,
+            "enabled": true,
+            "https_only": false,
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Web/sites/ns-fun-app",
+            "identity": [],
+            "key_vault_reference_identity_id": "SystemAssigned",
+            "kind": "functionapp",
+            "location": "eastus",
+            "name": "ns-fun-app",
+            "os_type": "",
+            "outbound_ip_addresses": "20.72.178.97,20.72.178.170,20.72.179.224,20.72.180.28,20.72.180.66,20.72.177.208,20.49.104.25",
+            "possible_outbound_ip_addresses": "20.72.178.97,20.72.178.170,20.72.179.224,20.72.180.28,20.72.180.66,20.72.177.208,20.72.180.81,20.62.225.31,20.72.180.88,20.72.180.95,20.72.180.102,20.72.180.112,20.72.180.167,20.62.224.130,20.62.226.126,20.62.228.168,20.62.229.214,20.62.231.3,20.62.231.56,20.62.231.194,20.62.231.224,20.72.176.209,20.62.231.228,20.72.179.127,20.72.176.88,20.72.176.170,20.72.176.171,52.151.201.221,52.151.202.10,52.151.202.227,20.49.104.25",
+            "resource_group_name": "nsdrrs",
+            "site_config": [
+              {
+                "always_on": false,
+                "app_scale_limit": 0,
+                "auto_swap_slot_name": "",
+                "cors": [
+                  {
+                    "allowed_origins": [],
+                    "support_credentials": false
+                  }
+                ],
+                "dotnet_framework_version": "v6.0",
+                "elastic_instance_minimum": 0,
+                "ftps_state": "AllAllowed",
+                "health_check_path": "",
+                "http2_enabled": false,
+                "ip_restriction": [],
+                "java_version": "",
+                "linux_fx_version": "",
+                "min_tls_version": "1.2",
+                "pre_warmed_instance_count": 0,
+                "runtime_scale_monitoring_enabled": false,
+                "scm_ip_restriction": [],
+                "scm_type": "None",
+                "scm_use_main_ip_restriction": false,
+                "use_32_bit_worker_process": true,
+                "vnet_route_all_enabled": false,
+                "websockets_enabled": false
+              }
+            ],
+            "site_credential": [
+              {
+                "password": "gKTdcBog3JThpuPC1YfjedqfnXMgSiti4mio4vAHRo4gEcrglkQzbj6aFTwh",
+                "username": "$ns-fun-app"
+              }
+            ],
+            "source_control": [
+              {
+                "branch": "master",
+                "manual_integration": false,
+                "repo_url": "",
+                "rollback_enabled": false,
+                "use_mercurial": false
+              }
+            ],
+            "storage_account_access_key": "eJsfGlhsoA4AU3uFpt5IMLrsMMWmdHE3HW5D2ionc6kbA823x65vdjGuLvgtLca7UeT94O4CXoDO+AStqWe8RA==",
+            "storage_account_name": "mystorage05",
+            "storage_connection_string": "DefaultEndpointsProtocol=https;AccountName=mystorage05;AccountKey=eJsfGlhsoA4AU3uFpt5IMLrsMMWmdHE3HW5D2ionc6kbA823x65vdjGuLvgtLca7UeT94O4CXoDO+AStqWe8RA==;EndpointSuffix=core.windows.net",
+            "tags": {},
+            "timeouts": null,
+            "version": "~3"
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "storage_account_access_key"
+              }
+            ]
+          ],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "module.Demo_Azure_Module_RG.azurerm_resource_group.rg",
+            "module.app_service_plan.azurerm_app_service_plan.app_service_plan",
+            "module.function_app.azurerm_storage_account.storage_account",
+            "module.vnet.azurerm_virtual_network.vnet"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.function_app",
+      "mode": "managed",
+      "type": "azurerm_log_analytics_workspace",
+      "name": "demologaws",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "daily_quota_gb": -1,
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.OperationalInsights/workspaces/acctest-01",
+            "internet_ingestion_enabled": true,
+            "internet_query_enabled": true,
+            "location": "eastus",
+            "name": "acctest-01",
+            "portal_url": "",
+            "primary_shared_key": "ZpZ7ebvyAbo2iZKQTsCnV3a+/Lc2G1vyY7qOEXDSV8X3s815a4a7Af3flWCUW2FA+/hXyI6k/XftxulTXmTKGA==",
+            "reservation_capacity_in_gb_per_day": null,
+            "reservation_capcity_in_gb_per_day": null,
+            "resource_group_name": "nsdrrs",
+            "retention_in_days": 30,
+            "secondary_shared_key": "GId9XjXt7mESNLiQCWjPLEBaJ+7VDMehI0DBemuWQ3g5pms8acp00NlLoeu8qw1Nf2tFi2iihIuuDyZOhct/AA==",
+            "sku": "pergb2018",
+            "tags": {},
+            "timeouts": null,
+            "workspace_id": "5808caff-c849-4665-b140-71df2dba86ae"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIyIn0=",
+          "dependencies": [
+            "module.Demo_Azure_Module_RG.azurerm_resource_group.rg",
+            "module.app_service_plan.azurerm_app_service_plan.app_service_plan",
+            "module.vnet.azurerm_virtual_network.vnet"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.function_app",
+      "mode": "managed",
+      "type": "azurerm_storage_account",
+      "name": "storage_account",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "access_tier": "Hot",
+            "account_kind": "StorageV2",
+            "account_replication_type": "GRS",
+            "account_tier": "Standard",
+            "allow_blob_public_access": false,
+            "azure_files_authentication": [],
+            "blob_properties": [
+              {
+                "change_feed_enabled": false,
+                "container_delete_retention_policy": [],
+                "cors_rule": [],
+                "default_service_version": "",
+                "delete_retention_policy": [],
+                "last_access_time_enabled": false,
+                "versioning_enabled": false
+              }
+            ],
+            "custom_domain": [],
+            "enable_https_traffic_only": true,
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Storage/storageAccounts/mystorage05",
+            "identity": [],
+            "infrastructure_encryption_enabled": false,
+            "is_hns_enabled": false,
+            "large_file_share_enabled": null,
+            "location": "eastus",
+            "min_tls_version": "TLS1_0",
+            "name": "mystorage05",
+            "network_rules": [
+              {
+                "bypass": [
+                  "AzureServices"
+                ],
+                "default_action": "Allow",
+                "ip_rules": [],
+                "private_link_access": [],
+                "virtual_network_subnet_ids": []
+              }
+            ],
+            "nfsv3_enabled": false,
+            "primary_access_key": "eJsfGlhsoA4AU3uFpt5IMLrsMMWmdHE3HW5D2ionc6kbA823x65vdjGuLvgtLca7UeT94O4CXoDO+AStqWe8RA==",
+            "primary_blob_connection_string": "DefaultEndpointsProtocol=https;BlobEndpoint=https://mystorage05.blob.core.windows.net/;AccountName=mystorage05;AccountKey=eJsfGlhsoA4AU3uFpt5IMLrsMMWmdHE3HW5D2ionc6kbA823x65vdjGuLvgtLca7UeT94O4CXoDO+AStqWe8RA==",
+            "primary_blob_endpoint": "https://mystorage05.blob.core.windows.net/",
+            "primary_blob_host": "mystorage05.blob.core.windows.net",
+            "primary_connection_string": "DefaultEndpointsProtocol=https;AccountName=mystorage05;AccountKey=eJsfGlhsoA4AU3uFpt5IMLrsMMWmdHE3HW5D2ionc6kbA823x65vdjGuLvgtLca7UeT94O4CXoDO+AStqWe8RA==;EndpointSuffix=core.windows.net",
+            "primary_dfs_endpoint": "https://mystorage05.dfs.core.windows.net/",
+            "primary_dfs_host": "mystorage05.dfs.core.windows.net",
+            "primary_file_endpoint": "https://mystorage05.file.core.windows.net/",
+            "primary_file_host": "mystorage05.file.core.windows.net",
+            "primary_location": "eastus",
+            "primary_queue_endpoint": "https://mystorage05.queue.core.windows.net/",
+            "primary_queue_host": "mystorage05.queue.core.windows.net",
+            "primary_table_endpoint": "https://mystorage05.table.core.windows.net/",
+            "primary_table_host": "mystorage05.table.core.windows.net",
+            "primary_web_endpoint": "https://mystorage05.z13.web.core.windows.net/",
+            "primary_web_host": "mystorage05.z13.web.core.windows.net",
+            "queue_encryption_key_type": "Service",
+            "queue_properties": [
+              {
+                "cors_rule": [],
+                "hour_metrics": [
+                  {
+                    "enabled": true,
+                    "include_apis": true,
+                    "retention_policy_days": 7,
+                    "version": "1.0"
+                  }
+                ],
+                "logging": [
+                  {
+                    "delete": false,
+                    "read": false,
+                    "retention_policy_days": 0,
+                    "version": "1.0",
+                    "write": false
+                  }
+                ],
+                "minute_metrics": [
+                  {
+                    "enabled": false,
+                    "include_apis": false,
+                    "retention_policy_days": 0,
+                    "version": "1.0"
+                  }
+                ]
+              }
+            ],
+            "resource_group_name": "nsdrrs",
+            "routing": [],
+            "secondary_access_key": "zfbz1QG3EYSMQIJK0dfwLPiXfI+AU5dpQ1uck3Q02WIM/AImRzOVPQ2u0P6TKBR3SMilnc8kFuFq+AStiz8ugA==",
+            "secondary_blob_connection_string": "",
+            "secondary_blob_endpoint": null,
+            "secondary_blob_host": null,
+            "secondary_connection_string": "DefaultEndpointsProtocol=https;AccountName=mystorage05;AccountKey=zfbz1QG3EYSMQIJK0dfwLPiXfI+AU5dpQ1uck3Q02WIM/AImRzOVPQ2u0P6TKBR3SMilnc8kFuFq+AStiz8ugA==;EndpointSuffix=core.windows.net",
+            "secondary_dfs_endpoint": null,
+            "secondary_dfs_host": null,
+            "secondary_file_endpoint": null,
+            "secondary_file_host": null,
+            "secondary_location": "westus",
+            "secondary_queue_endpoint": null,
+            "secondary_queue_host": null,
+            "secondary_table_endpoint": null,
+            "secondary_table_host": null,
+            "secondary_web_endpoint": null,
+            "secondary_web_host": null,
+            "share_properties": [
+              {
+                "cors_rule": [],
+                "retention_policy": [
+                  {
+                    "days": 7
+                  }
+                ],
+                "smb": []
+              }
+            ],
+            "shared_access_key_enabled": true,
+            "static_website": [],
+            "table_encryption_key_type": "Service",
+            "tags": {},
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozNjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjozNjAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIyIn0=",
+          "dependencies": [
+            "module.Demo_Azure_Module_RG.azurerm_resource_group.rg",
+            "module.app_service_plan.azurerm_app_service_plan.app_service_plan",
+            "module.vnet.azurerm_virtual_network.vnet"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.function_app.module.metric_alert",
+      "mode": "managed",
+      "type": "azurerm_monitor_action_group",
+      "name": "acg",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arm_role_receiver": [],
+            "automation_runbook_receiver": [],
+            "azure_app_push_receiver": [],
+            "azure_function_receiver": [],
+            "email_receiver": [
+              {
+                "email_address": "nsdreddy@outlook.com",
+                "name": "sendtoadmin",
+                "use_common_alert_schema": false
+              }
+            ],
+            "enabled": true,
+            "event_hub_receiver": [],
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Insights/actionGroups/abcefgh",
+            "itsm_receiver": [],
+            "logic_app_receiver": [],
+            "name": "abcefgh",
+            "resource_group_name": "nsdrrs",
+            "short_name": "demo",
+            "sms_receiver": [],
+            "tags": {},
+            "timeouts": null,
+            "voice_receiver": [],
+            "webhook_receiver": []
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "module.Demo_Azure_Module_RG.azurerm_resource_group.rg",
+            "module.app_service_plan.azurerm_app_service_plan.app_service_plan",
+            "module.vnet.azurerm_virtual_network.vnet"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.function_app.module.metric_alert",
+      "mode": "managed",
+      "type": "azurerm_monitor_metric_alert",
+      "name": "demorule1",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "action": [
+              {
+                "action_group_id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Insights/actionGroups/abcefgh",
+                "webhook_properties": {}
+              }
+            ],
+            "application_insights_web_test_location_availability_criteria": [],
+            "auto_mitigate": true,
+            "criteria": [
+              {
+                "aggregation": "Average",
+                "dimension": [],
+                "metric_name": "CpuPercentage",
+                "metric_namespace": "Microsoft.Web/serverfarms",
+                "operator": "GreaterThan",
+                "skip_metric_validation": false,
+                "threshold": 60
+              }
+            ],
+            "description": "Action will be triggered when CPU percentage is greater than 60.",
+            "dynamic_criteria": [],
+            "enabled": true,
+            "frequency": "PT1M",
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Insights/metricAlerts/function-alert",
+            "name": "function-alert",
+            "resource_group_name": "nsdrrs",
+            "scopes": [
+              "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Web/serverfarms/app_service_plan"
+            ],
+            "severity": 3,
+            "tags": {},
+            "target_resource_location": "",
+            "target_resource_type": "",
+            "timeouts": null,
+            "window_size": "PT5M"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "module.Demo_Azure_Module_RG.azurerm_resource_group.rg",
+            "module.app_service_plan.azurerm_app_service_plan.app_service_plan",
+            "module.function_app.module.metric_alert.azurerm_monitor_action_group.acg",
+            "module.vnet.azurerm_virtual_network.vnet"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.log_analytics",
+      "mode": "managed",
+      "type": "azurerm_log_analytics_workspace",
+      "name": "demologaws",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "daily_quota_gb": -1,
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.OperationalInsights/workspaces/acctest-02",
+            "internet_ingestion_enabled": true,
+            "internet_query_enabled": true,
+            "location": "eastus",
+            "name": "acctest-02",
+            "portal_url": "",
+            "primary_shared_key": "c2kS7ebEIsZI9k1/iLw4oh7BVCpK8GfGF4DNFGqZXPyy8HOvWfwddtxqIsMPblv9a3k2eMlvpb4BHyvUrSDieg==",
+            "reservation_capacity_in_gb_per_day": null,
+            "reservation_capcity_in_gb_per_day": null,
+            "resource_group_name": "nsdrrs",
+            "retention_in_days": 30,
+            "secondary_shared_key": "W2Rce1vLIalkhLKbg9ZUtURIdI3zgNqN0YTEfJLeAecMBpucM3Y0pMv2dFAk4U1JeKG2XgrHmix7+z6B+PhNzQ==",
+            "sku": "pergb2018",
+            "tags": {},
+            "timeouts": null,
+            "workspace_id": "ba8d6c6a-116a-4808-8d11-dbae8caac46b"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIyIn0="
+        }
+      ]
+    },
+    {
+      "module": "module.nsg",
+      "mode": "managed",
+      "type": "azurerm_network_security_group",
+      "name": "nsg",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Network/networkSecurityGroups/nsg-rule",
+            "location": "eastus",
+            "name": "nsg-rule",
+            "resource_group_name": "nsdrrs",
+            "security_rule": [
+              {
+                "access": "Allow",
+                "description": "",
+                "destination_address_prefix": "*",
+                "destination_address_prefixes": [],
+                "destination_application_security_group_ids": [],
+                "destination_port_range": "*",
+                "destination_port_ranges": [],
+                "direction": "Inbound",
+                "name": "test123",
+                "priority": 100,
+                "protocol": "Tcp",
+                "source_address_prefix": "*",
+                "source_address_prefixes": [],
+                "source_application_security_group_ids": [],
+                "source_port_range": "*",
+                "source_port_ranges": []
+              }
+            ],
+            "tags": {},
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "module.Demo_Azure_Module_RG.azurerm_resource_group.rg",
+            "module.appsubnet.azurerm_subnet.subnet",
+            "module.appsubnet.data.azurerm_subscription.current",
+            "module.dbsubnet.azurerm_subnet.subnet",
+            "module.dbsubnet.data.azurerm_subscription.current",
+            "module.vnet.azurerm_virtual_network.vnet"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.storage",
+      "mode": "managed",
+      "type": "azurerm_storage_account",
+      "name": "storage",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "access_tier": "Hot",
+            "account_kind": "StorageV2",
+            "account_replication_type": "GRS",
+            "account_tier": "Standard",
+            "allow_blob_public_access": false,
+            "azure_files_authentication": [],
+            "blob_properties": [
+              {
+                "change_feed_enabled": false,
+                "container_delete_retention_policy": [],
+                "cors_rule": [],
+                "default_service_version": "",
+                "delete_retention_policy": [],
+                "last_access_time_enabled": false,
+                "versioning_enabled": false
+              }
+            ],
+            "custom_domain": [],
+            "enable_https_traffic_only": true,
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Storage/storageAccounts/mystorage04",
+            "identity": [],
+            "infrastructure_encryption_enabled": false,
+            "is_hns_enabled": false,
+            "large_file_share_enabled": null,
+            "location": "eastus",
+            "min_tls_version": "TLS1_0",
+            "name": "mystorage04",
+            "network_rules": [
+              {
+                "bypass": [
+                  "AzureServices"
+                ],
+                "default_action": "Allow",
+                "ip_rules": [],
+                "private_link_access": [],
+                "virtual_network_subnet_ids": []
+              }
+            ],
+            "nfsv3_enabled": false,
+            "primary_access_key": "dBVz8ejxfNdagb2h1p1bfpmXzrMLqkwpBEf5iLmrW7wIT2OJwt6XqSpbajlskCZ67w1HaYwg+kPF+AStDo34HQ==",
+            "primary_blob_connection_string": "DefaultEndpointsProtocol=https;BlobEndpoint=https://mystorage04.blob.core.windows.net/;AccountName=mystorage04;AccountKey=dBVz8ejxfNdagb2h1p1bfpmXzrMLqkwpBEf5iLmrW7wIT2OJwt6XqSpbajlskCZ67w1HaYwg+kPF+AStDo34HQ==",
+            "primary_blob_endpoint": "https://mystorage04.blob.core.windows.net/",
+            "primary_blob_host": "mystorage04.blob.core.windows.net",
+            "primary_connection_string": "DefaultEndpointsProtocol=https;AccountName=mystorage04;AccountKey=dBVz8ejxfNdagb2h1p1bfpmXzrMLqkwpBEf5iLmrW7wIT2OJwt6XqSpbajlskCZ67w1HaYwg+kPF+AStDo34HQ==;EndpointSuffix=core.windows.net",
+            "primary_dfs_endpoint": "https://mystorage04.dfs.core.windows.net/",
+            "primary_dfs_host": "mystorage04.dfs.core.windows.net",
+            "primary_file_endpoint": "https://mystorage04.file.core.windows.net/",
+            "primary_file_host": "mystorage04.file.core.windows.net",
+            "primary_location": "eastus",
+            "primary_queue_endpoint": "https://mystorage04.queue.core.windows.net/",
+            "primary_queue_host": "mystorage04.queue.core.windows.net",
+            "primary_table_endpoint": "https://mystorage04.table.core.windows.net/",
+            "primary_table_host": "mystorage04.table.core.windows.net",
+            "primary_web_endpoint": "https://mystorage04.z13.web.core.windows.net/",
+            "primary_web_host": "mystorage04.z13.web.core.windows.net",
+            "queue_encryption_key_type": "Service",
+            "queue_properties": [
+              {
+                "cors_rule": [],
+                "hour_metrics": [
+                  {
+                    "enabled": true,
+                    "include_apis": true,
+                    "retention_policy_days": 7,
+                    "version": "1.0"
+                  }
+                ],
+                "logging": [
+                  {
+                    "delete": false,
+                    "read": false,
+                    "retention_policy_days": 0,
+                    "version": "1.0",
+                    "write": false
+                  }
+                ],
+                "minute_metrics": [
+                  {
+                    "enabled": false,
+                    "include_apis": false,
+                    "retention_policy_days": 0,
+                    "version": "1.0"
+                  }
+                ]
+              }
+            ],
+            "resource_group_name": "nsdrrs",
+            "routing": [],
+            "secondary_access_key": "YJTI38aLAxx7n3QscPBqnaf2CkLmEwI18KrrU7Zw0QCNPuKfRzSHXVuO5kH1HcoOGapskcSXT12r+AStfWEHYg==",
+            "secondary_blob_connection_string": "",
+            "secondary_blob_endpoint": null,
+            "secondary_blob_host": null,
+            "secondary_connection_string": "DefaultEndpointsProtocol=https;AccountName=mystorage04;AccountKey=YJTI38aLAxx7n3QscPBqnaf2CkLmEwI18KrrU7Zw0QCNPuKfRzSHXVuO5kH1HcoOGapskcSXT12r+AStfWEHYg==;EndpointSuffix=core.windows.net",
+            "secondary_dfs_endpoint": null,
+            "secondary_dfs_host": null,
+            "secondary_file_endpoint": null,
+            "secondary_file_host": null,
+            "secondary_location": "westus",
+            "secondary_queue_endpoint": null,
+            "secondary_queue_host": null,
+            "secondary_table_endpoint": null,
+            "secondary_table_host": null,
+            "secondary_web_endpoint": null,
+            "secondary_web_host": null,
+            "share_properties": [
+              {
+                "cors_rule": [],
+                "retention_policy": [
+                  {
+                    "days": 7
+                  }
+                ],
+                "smb": []
+              }
+            ],
+            "shared_access_key_enabled": true,
+            "static_website": [],
+            "table_encryption_key_type": "Service",
+            "tags": {},
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozNjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjozNjAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIyIn0=",
+          "dependencies": [
+            "module.Demo_Azure_Module_RG.azurerm_resource_group.rg"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.vnet",
+      "mode": "managed",
+      "type": "azurerm_virtual_network",
+      "name": "vnet",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address_space": [
+              "10.0.0.0/16"
+            ],
+            "bgp_community": "",
+            "ddos_protection_plan": [],
+            "dns_servers": [],
+            "flow_timeout_in_minutes": 0,
+            "guid": "7ef0a655-ebd1-46e3-9544-b8a2b88b43c6",
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Network/virtualNetworks/myvnet",
+            "location": "eastus",
+            "name": "myvnet",
+            "resource_group_name": "nsdrrs",
+            "subnet": [
+              {
+                "address_prefix": "10.0.1.0/24",
+                "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/appsubnet",
+                "name": "appsubnet",
+                "security_group": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Network/networkSecurityGroups/nsg-rule"
+              },
+              {
+                "address_prefix": "10.0.2.0/24",
+                "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/dbsubnet",
+                "name": "dbsubnet",
+                "security_group": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Network/networkSecurityGroups/nsg-rule"
+              }
+            ],
+            "tags": {},
+            "timeouts": null,
+            "vm_protection_enabled": false
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "module.Demo_Azure_Module_RG.azurerm_resource_group.rg"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.windows_machine",
+      "mode": "managed",
+      "type": "azurerm_public_ip",
+      "name": "demo_ip",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "allocation_method": "Dynamic",
+            "availability_zone": "No-Zone",
+            "domain_name_label": null,
+            "fqdn": null,
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Network/publicIPAddresses/demo_ip",
+            "idle_timeout_in_minutes": 4,
+            "ip_address": "",
+            "ip_tags": {},
+            "ip_version": "IPv4",
+            "location": "eastus",
+            "name": "demo_ip",
+            "public_ip_prefix_id": null,
+            "resource_group_name": "nsdrrs",
+            "reverse_fqdn": null,
+            "sku": "Basic",
+            "sku_tier": "Regional",
+            "tags": {},
+            "timeouts": null,
+            "zones": []
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "module.Demo_Azure_Module_RG.azurerm_resource_group.rg"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.windows_machine",
+      "mode": "managed",
+      "type": "azurerm_virtual_machine_extension",
+      "name": "vmantivirus",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": []
+    },
+    {
+      "module": "module.windows_machine",
+      "mode": "managed",
+      "type": "azurerm_windows_virtual_machine",
+      "name": "example",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": []
+    },
+    {
+      "module": "module.windows_machine.module.metric_alert",
+      "mode": "managed",
+      "type": "azurerm_monitor_action_group",
+      "name": "acg",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arm_role_receiver": [],
+            "automation_runbook_receiver": [],
+            "azure_app_push_receiver": [],
+            "azure_function_receiver": [],
+            "email_receiver": [
+              {
+                "email_address": "nsdreddy@outlook.com",
+                "name": "sendtoadmin",
+                "use_common_alert_schema": false
+              }
+            ],
+            "enabled": true,
+            "event_hub_receiver": [],
+            "id": "/subscriptions/aad125f6-3115-4d0e-abad-dd5a528f098a/resourceGroups/nsdrrs/providers/Microsoft.Insights/actionGroups/function_alert",
+            "itsm_receiver": [],
+            "logic_app_receiver": [],
+            "name": "function_alert",
+            "resource_group_name": "nsdrrs",
+            "short_name": "demo",
+            "sms_receiver": [],
+            "tags": {},
+            "timeouts": null,
+            "voice_receiver": [],
+            "webhook_receiver": []
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "module.Demo_Azure_Module_RG.azurerm_resource_group.rg"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.windows_machine.module.metric_alert",
+      "mode": "managed",
+      "type": "azurerm_monitor_metric_alert",
+      "name": "demorule1",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": []
+    }
+  ]
+}

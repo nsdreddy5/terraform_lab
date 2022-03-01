@@ -1,7 +1,7 @@
 variable "resource_groups" {
   description = "The name of the module demo resource group in which the resources will be created"
   type        = list(string)
-  
+
 }
 
 variable "location" {

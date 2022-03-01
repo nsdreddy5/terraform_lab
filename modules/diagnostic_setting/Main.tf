@@ -9,7 +9,7 @@ resource "azurerm_monitor_diagnostic_setting" "diag_setting" {
     for_each = var.logs
     content {
       category = log.value.category
-      enabled = log.value.enabled
+      enabled  = log.value.enabled
       dynamic "retention_policy" {
         /* for_each = (log.value.retention_policy == null ? {} : log.value.retention_policy) */
         for_each = var.retention_policy1
