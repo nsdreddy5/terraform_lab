@@ -6,6 +6,3 @@ resource "azurerm_log_analytics_workspace" "demologaws" {
   retention_in_days   = 30
 }
 
-output "log_analytics" {
-  value = azurerm_log_analytics_workspace.demologaws
-}

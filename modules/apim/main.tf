@@ -29,9 +29,9 @@ resource "azurerm_api_management" "apim" {
     content_format = "swagger-link-json"
     content_value  = "http://conferenceapi.azurewebsites.net/?format=json"
   }
-} */
+}
 
- /* resource "azurerm_api_management_logger" "api_management_logger" {
+ resource "azurerm_api_management_logger" "api_management_logger" {
   name                = var.api_management_logger
   api_management_name = var.apim_management
   resource_group_name = var.resource_group
@@ -39,16 +39,9 @@ resource "azurerm_api_management" "apim" {
   application_insights {
     instrumentation_key = azurerm_application_insights.application_insights.instrumentation_key
   }
-} */
+} 
 
-/* import {
 
-  content_format = "swagger-link-json"
-
-  content_value = "http://conferenceapi.azurewebsites.net/?format=json"
-
-} */
-/* 
 resource "azurerm_api_management_diagnostic" "example" {
   identifier               = "applicationinsights"
   resource_group_name      = var.resource_group
@@ -96,4 +89,4 @@ resource "azurerm_api_management_diagnostic" "example" {
       "origin",
     ]
   }
-} */ 
+}  */

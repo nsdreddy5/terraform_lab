@@ -197,7 +197,7 @@ output "dbsubnet" {
 }
 
 
-
+//NSG
 module "nsg" {
   depends_on     = [module.Demo_Azure_Module_RG, module.dbsubnet, module.appsubnet]
   source         = "./modules/nsg"
@@ -209,7 +209,7 @@ module "nsg" {
 }
 
 
-
+//NSG association
 resource "azurerm_subnet_network_security_group_association" "subnet_association" {
   subnet_id                 = module.appsubnet.subnet.id
   network_security_group_id = module.nsg.nsg.id
@@ -220,7 +220,7 @@ resource "azurerm_subnet_network_security_group_association" "dbsubnet_associati
   network_security_group_id = module.nsg.nsg.id
 }
 
-
+//module apim
 module "apim" {
   depends_on            = [module.Demo_Azure_Module_RG] 
   source                = "./modules/apim"

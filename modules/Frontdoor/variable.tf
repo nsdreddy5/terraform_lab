@@ -1,11 +1,11 @@
-/* variable "frontdoor" {
+variable "frontdoor" {
   type = string
 }
-
-/* variable "location" {
+/* 
+variable "location" {
   type = string
-} */
+}  */
 
-/* variable "resource_group" {
+variable "resource_group" {
   type = string
-} */ */
+}

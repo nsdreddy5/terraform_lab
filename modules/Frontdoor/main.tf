@@ -1,5 +1,5 @@
-/* resource "azurerm_frontdoor" "frontdoor" {
-  name                                         = "example-FrontDoor"
+resource "azurerm_frontdoor" "frontdoor" {
+  name                                         = var.FrontDoor
   resource_group_name                          = var.resource_group
   enforce_backend_pools_certificate_name_check = false
 
@@ -39,4 +39,4 @@
     name      = "demoFrontendEndpoint1"
     host_name = "demo-FrontDoor.azurefd.net"
   }
-} */
+}
