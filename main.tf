@@ -3,14 +3,27 @@ module "Demo_Azure_Module_RG" {
   resource_groups = var.resource_groups
   location        = var.location
 }
-module "log_analytics" {
-  source              = "./Modules/log_analytics"
+/* module "log_analytics" {
+  source = "./Modules/log_analytics"
   depends_on = [
     module.Demo_Azure_Module_RG
   ]
   resource_group_name = var.resource_group
   location            = var.location
+} */
+
+module "la" {
+  depends_on = [
+    module.Demo_Azure_Module_RG
+  ]
+  source = "./modules/log_analytics"
+  resource_group = var.resource_group
+  log_analytics_name = "eus-la"
+  location = var.location
+  sku = "PerGB2018"
+  retention_in_days = 30
 }
+
 locals {
   network_security_group_names = ["nsg1", "nsg2"]
   subnetname                   = ["appsubnet", "dbsubnet"]
@@ -41,28 +54,25 @@ output "azurerm_subnet" {
   value = module.subnet.subnet.*
 }
 module "vnet" {
-  depends_on = [
-    module.Demo_Azure_Module_RG
-  ]
-  source         = "./modules/vnet"
-virtual_networks = var.virtual_networks
+  depends_on = [module.Demo_Azure_Module_RG,module.l]
+  source           = "./modules/vnet"
+  virtual_networks = var.virtual_networks
+  log_analytics_id = module.la.log_analytics.id
 
 }
 
-module "subnet"{
-  depends_on = [module.vnet]
-  source         = "./modules/subnet"
-  subnet = var.subnet
-  resource_group = var.resource_group
-  location =  var.location
-  nsg = var.nsg
+module "subnet" {
+  depends_on      = [module.vnet]
+  source          = "./modules/subnet"
+  subnet          = var.subnet
+  resource_group  = var.resource_group
+  location        = var.location
+  nsg             = var.nsg
   virtual_network = var.virtual_network
 
 }
 module "storage" {
-  depends_on = [
-    module.Demo_Azure_Module_RG
-  ]
+  depends_on = [module.Demo_Azure_Module_RG]
   source                   = "./modules/storage"
   storage_account_name     = var.storage_account_name
   resource_group           = var.resource_group
@@ -73,9 +83,7 @@ module "storage" {
 }
 
 module "app_service_plan" {
-  depends_on = [
-    module.Demo_Azure_Module_RG
-  ]
+  depends_on = [module.Demo_Azure_Module_RG]
   source                = "./modules/app_service_plan"
   app_service_plan_name = var.app_service_plan_name
   location              = var.location
@@ -92,8 +100,7 @@ module "function_app" {
   action_group_name        = var.action_group_name
   account_tier             = var.storage_account_account_tier
   account_replication_type = var.storage_account_replication_type
-  subnet = module.subnet.subnet.subnet1.id
-  /* app_service_plan_name                   = var.app_service_plan_name */
+  subnet                   = module.subnet.subnet.subnet1.id
   /* azurerm_monitor_diagnostic_setting_name = var.azurerm_monitor_diagnostic_setting_name */
   azurerm_monitor_action_group_name  = var.azurerm_monitor_action_group_name
   azurerm_monitor_metric_alert_name  = var.azurerm_monitor_metric_alert_name
@@ -104,12 +111,10 @@ module "function_app" {
   alert_name = var.alert_name
 }
 
+//Windows VM Creation
 module "windows_machine" {
-  depends_on = [
-    module.Demo_Azure_Module_RG
-  ]
+  depends_on = [module.Demo_Azure_Module_RG]
   source = "./modules/vm"
-
   location          = var.location
   resource_group    = var.resource_group
   subnet_id         = module.subnet.subnet.subnet3.id
@@ -122,10 +127,11 @@ module "windows_machine" {
 
 }
 
+
+
+//Diagnostics Settings
 module "diagnostics" {
-  depends_on = [
-    module.function_app, module.windows_machine, module.Demo_Azure_Module_RG
-  ]
+  depends_on = [module.function_app, module.windows_machine, module.Demo_Azure_Module_RG]
   source                     = "./modules/diagnostic_setting"
   name                       = "abcd"
   target_resource_id         = module.function_app.function_app.id
@@ -145,16 +151,78 @@ module "diagnostics" {
   }
 }
 
+//SQL DB Creation
+module "sql_db" {
+  depends_on = [module.Demo_Azure_Module_RG,module.la]
+  source                           = "./modules/sql_db"
+  resource_group                   = var.resource_group
+  location                         = var.location
+  sql_server                       = var.sql_server
+  sql_version                      = var.sql_version
+  subnet                           = module.subnet.subnet.subnet2.id
+  administrator_login              = var.administrator_login
+  administrator_login_password     = var.administrator_login_password
+  sql_firewall_rule                = var.sql_firewall_rule
+  sql_database                     = var.sql_database
+  edition                          = var.edition
+  requested_service_objective_name = var.requested_service_objective_name
+  log_analytics_id = module.la.log_analytics.id
+}
 
+
+//log-analytics
+
+
+//frontdoor
+module "frontdoor" {
+  depends_on                       = [module.Demo_Azure_Module_RG]
+  source                           = "./modules/Frontdoor"
+  frontdoor_name                   = var.frontdoor_name
+  resource_group                   = var.resource_group
+  routing_rule_name                = var.routing_rule_name
+  forwarding_protocol              = var.forwarding_protocol
+  backend_pool_name                = var.backend_pool_name
+  backend_pool_load_balancing_name = var.backend_pool_load_balancing_name
+  backend_pool_health_probe_name   = var.backend_pool_health_probe_name
+  backend_pool_name1 = {
+    backend = {
+     name = var.backend_pool_name
+      host  = "www.bing.com"
+      address = "www.bing.com"
+      http_port = "80"
+      https_port ="443"
+    }
+  }
+  frontend  =  {
+    frontend1 = {
+      frontdoor_name = var.frontdoor_name
+      host_name = var.host_name
+    }
+  }
+  routing_rule_name1 = {
+    "routing" = {
+      accepted_protocols = [ "Http","Https" ]
+      frontend_endpoints =["example-FrontDoor"]
+      name = "routing1"
+      patterns_to_match = ["/*"]
+    }
+  }
+  load_balancing_name              = var.load_balancing_name
+  health_probe_name                = var.health_probe_name
+  frontend_endpoint_name           = var.frontend_endpoint_name
+  host_name                        = var.host_name
+}
 //NSG
 /* module "nsg" {
-  depends_on     = [module.Demo_Azure_Module_RG, module.dbsubnet, module.appsubnet]
+  depends_on     = [module.Demo_Azure_Module_RG, module.dbsubnet, module.la,module.appsubnet]
   source         = "./modules/nsg"
   name           = "nsg-rule"
   location       = var.location
   resource_group = var.resource_group */
-  /* source_address_prefix =  module.appsubnet.subnet.id
-  destination_address_prefix =  module.dbsubnet.subnet.id */
+/* source_address_prefix =  module.appsubnet.subnet.id
+  destination_address_prefix =  module.dbsubnet.subnet.id
+  log_analytics_id = module.la.log_analytics.id
+   */
 /* } */
 
 

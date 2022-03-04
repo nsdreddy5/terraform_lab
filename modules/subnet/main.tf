@@ -26,15 +26,9 @@ resource "azurerm_network_security_group" "nsg" {
   }
 }
 
-/* resource "azurerm_subnet_network_security_group_association" "nsg-assocation" {
-  for_each = azurerm_subnet.subnet[*].id
-  subnet_id                 = each.value
-  network_security_group_id = azurerm_network_security_group.nsg[0].id
-} */
-
-
 data "azurerm_subscription" "current" {
 }
+
 
 
 

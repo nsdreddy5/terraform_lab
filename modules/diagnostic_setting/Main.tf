@@ -23,3 +23,4 @@ resource "azurerm_monitor_diagnostic_setting" "diag_setting" {
   }
 
 }
+

@@ -18,6 +18,33 @@ resource "azurerm_network_security_group" "nsg" {
   }
 }
 
+module "diagnostics" {
+  source                     = "../diagnostic_setting"
+  name                       = "abcdefggh"
+  target_resource_id         = azurerm_network_security_group.nsg.id
+  log_analytics_workspace_id = var.log_analytics_id
+  retention_policy1 = {
+    retention_policy1 = {
+      enabled = false
+      days    = 30
+    }
+  }
+  logs = {
+    log1 = {
+      category = "NetworkSecurityGroupEvent"
+      enabled  = true
+    }
+
+  }
+}
+
+variable "log_analytics_id" {
+  type = string
+  
+}
+
+
+
   /* priority                   = 100
     direction                  = "Inbound"
     access                     = "Allow"

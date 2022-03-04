@@ -19,6 +19,11 @@ resource "azurerm_function_app" "functionapp" {
   version = "~3"
 }
 
+resource "azurerm_app_service_virtual_network_swift_connection" "example" {
+  app_service_id = var.app_service_plan_id
+  subnet_id      = var.subnet
+}
+
 output "function_app" {
   value = azurerm_function_app.functionapp
 }
